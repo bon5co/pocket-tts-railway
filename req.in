@@ -1,0 +1,6 @@
+# Direct dependencies; requirements.txt is compiled from this with:
+#   uv pip compile req.in --python-version 3.12 --index-url https://pypi.org/simple --extra-index-url https://download.pytorch.org/whl/cpu --index-strategy unsafe-best-match -o requirements.txt
+# torch comes from the CPU-only wheel index (no CUDA libraries in the image).
+pocket-tts==4.0.1
+soundfile>=0.12.1
+torch

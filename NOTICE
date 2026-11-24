@@ -1,0 +1,25 @@
+Wrapper code in this repository (app.py, fetch_weights.py, entrypoint.sh, Dockerfile) is Apache-2.0, see LICENSE.
+
+The container image built from it contains:
+
+- The `pocket-tts` Python package 4.0.1 (https://github.com/kyutai-labs/pocket-tts), MIT License, installed unchanged
+  from PyPI. Its licence text ships in the image at /licenses/pocket-tts-LICENSE and in this repository as
+  LICENSE-pocket-tts.
+- The model weights from https://huggingface.co/kyutai/pocket-tts-without-voice-cloning (commit
+  a7056f505a4a8ca72d8b5fb1440071d6f1a35739) and its tokenizer (commit 00eac05ed3d16bdc3f6b5d598874019c34a89214),
+  by Kyutai, declared `license: cc-by-4.0` and ungated (read 2026-11-25). Licensed under Creative Commons
+  Attribution 4.0 International; attribution: "Pocket TTS by Kyutai (Manu Orsini, Simon Rouard, Gabriel De Marmiesse,
+  Vaclav Volhejn, Neil Zeghidour, Alexandre Defossez), CC BY 4.0, unmodified". The legal text ships in the image at
+  /licenses/CC-BY-4.0-LICENSE and in this repository as LICENSE-CC-BY-4.0. The model card adds a prohibited-use
+  paragraph, reproduced in README-marketplace.md.
+- 19 preset voice embeddings from the same repository. Their source recordings (kyutai/tts-voices) are licensed:
+  CC BY 4.0 for alba (Alba MacKenna), anna, vera, fantine, charles, paul, eponine, azelma, george, mary, jane,
+  michael and eve (CSTR VCTK corpus, University of Edinburgh); CC0 for marius and javert (Unmute Voice Donation
+  Project), and bill_boerst, peter_yearsley, stuart_bell and caro_davy (Voice-Zero, LibriVox). The voices `cosette`
+  (Expresso) and `jean` (EARS) are CC BY-NC 4.0, non-commercial, and are deliberately NOT in this image.
+- PyTorch (BSD-3-Clause, CPU wheel), NumPy (BSD-3-Clause), SoundFile (BSD-3-Clause) with libsndfile (LGPL-2.1), FastAPI
+  (MIT), uvicorn (BSD-3-Clause) and the other Python dependencies pinned in requirements.txt, each under its own licence.
+
+Voice cloning from an uploaded sample is not offered: the weights that contain the cloning encoder
+(kyutai/pocket-tts) are gated, and this image carries the ungated ones. The model has no content filter and no
+watermark. The operator is responsible for what the API is asked to say and for how the audio is used.
